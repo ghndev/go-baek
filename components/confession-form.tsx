@@ -25,7 +25,7 @@ export default function ConfessionForm({ user }: { user?: User }) {
                 <textarea
                     name="content"
                     rows={5}
-                    placeholder={user ? "Write your secret here..." : "Please login to write a confession."}
+                    placeholder={user ? "e.g. I've liked you since the first time we met... (Write your secret here)" : "Please login to write a confession."}
                     disabled={!user || isPending}
                     className="w-full bg-gray-50/50 p-4 text-2xl leading-relaxed resize-none border-2 border-gray-100 rounded-lg focus:border-gray-300 outline-hidden placeholder-gray-300 disabled:cursor-not-allowed disabled:bg-gray-100"
                 />
@@ -41,7 +41,7 @@ export default function ConfessionForm({ user }: { user?: User }) {
                 <button
                     type="submit"
                     disabled={!user || isPending}
-                    className="bg-gray-800 text-white px-6 py-2 rounded-full text-xl hover:bg-black transition-transform hover:-translate-y-1 disabled:opacity-50 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
+                    className="bg-gray-800 text-white cursor-pointer px-6 py-2 rounded-full text-xl hover:bg-black transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isPending ? "Sharing..." : "Share Secret"}
                 </button>
