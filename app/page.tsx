@@ -8,30 +8,30 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <main className="min-h-screen p-4 flex flex-col items-center justify-center">
+    <main className="min-h-screen p-4 flex flex-col items-center justify-center relative">
+      <div className="absolute top-6 right-6 font-gaegu flex flex-row items-center gap-3 md:flex-col md:items-end md:gap-0 z-20">
+        {session?.user ? (
+          <>
+            <p className="text-sm md:text-xl text-gray-700 md:mb-2">Hello, {session.user.name}</p>
+            <form action={async () => {
+              "use server";
+              await signOut();
+            }}>
+              <button type="submit" className="text-xs md:text-base text-gray-500 hover:text-red-500 underline decoration-dashed">
+                Close Book (Logout)
+              </button>
+            </form>
+          </>
+        ) : (
+          <Link href="/login" className="text-sm md:text-xl text-gray-500 hover:text-gray-800 underline decoration-dashed transition-colors">
+            Open Book (Login)
+          </Link>
+        )}
+      </div>
+
       <div className="text-center mb-8 mt-12 relative w-full max-w-3xl">
         <h1 className="text-7xl font-bold mb-2 tracking-tighter transform -rotate-2">Go-Baek</h1>
         <p className="text-2xl text-gray-500">A Digital Notebook for Your Secrets</p>
-
-        <div className="absolute top-0 right-0 font-gaegu flex flex-col items-end">
-          {session?.user ? (
-            <>
-              <p className="text-xl text-gray-700 mb-2">Hello, {session.user.name}</p>
-              <form action={async () => {
-                "use server";
-                await signOut();
-              }}>
-                <button type="submit" className="text-gray-500 hover:text-red-500 underline decoration-dashed">
-                  Close Book (Logout)
-                </button>
-              </form>
-            </>
-          ) : (
-            <Link href="/login" className="text-xl text-gray-500 hover:text-gray-800 underline decoration-dashed transition-colors">
-              Open Book (Login)
-            </Link>
-          )}
-        </div>
       </div>
 
       <NotebookPaper>
